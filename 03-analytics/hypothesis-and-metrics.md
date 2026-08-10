@@ -1,17 +1,28 @@
-# Hypothesis & Success Metrics
+# Hypothesis & Success Metrics (Module 3)
 
-> **Module 3 · ★ Deliverable 3.** Repo file `03-analytics/hypothesis-and-metrics.md` — part of your submission.
-> Do the lab in the **Module 3 · Exercise Guide** (linked from the Module 3 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It feeds the **Problem, Value & Hypothesis** slide of your Module 6 final deck.
+## Pre-work · Hypothesis check
+- **Role , who you are solving for (from M2):** Dispatch Coordinator
+- **Goal , what this user is ultimately trying to achieve:** Keep routes running efficiently and adapt to changes without relying on manual coordination or external tools.
+- **Friction / moment of misery , the specific pain blocking their goal:** System and connectivity failures disrupt route management, forcing the dispatcher to rely on WhatsApp, phone calls, and other manual workarounds to keep drivers moving.
+- **Current workaround , the external tool or manual process they rely on (M2):** WhatsApp, phone calls, and side spreadsheets or notes to communicate route changes, verify driver status, and reconcile information manually.
+- **Problem Hook , your one-sentence framing of the business crisis (M1):** Customers may churn as competitors offer more efficient solutions, while operations teams are forced to rely on spreadsheets, mapping tools, and phone calls to manage route changes.
+- **Value Proposition , the outcome your initiative promised to deliver (M1):** We will allow operations teams to pre-establish and optimize routes, while continuing to manage them offline when the main system is unavailable, reducing manual work and operational disruption.
 
-## Finalized product hypothesis
+## Read your data snapshots
+- **Does the funnel data confirm your M2 friction point, or does it tell a different story? Note where the numbers align with the qualitative pain you found and where they diverge.:** _(not filled in)_
+- **Do the retention patterns align with the workaround your M2 persona used to find content? Note what the Mo. 0→1 drop suggests about the onboarding experience your persona described as frustrating.:** _(not filled in)_
+- **Does the LTV gap and the content mix (61% trending for Wanderers) confirm the moment of misery your persona described? Note which segment your persona is in and whether the data confirms their pain.:** _(not filled in)_
+- **Does the low adoption confirm your persona is burdened by tools they don’t use? Note whether the low scheduling adoption (42%) for coordinators matches your M2 moment of misery.:** Not directly. Our M2 friction focused on system reliability and manual workarounds, while Snapshot 1 reveals an additional issue: coordinators heavily use core dispatch features but have much lower adoption of non-core features, such as Scheduling (42%) and AI Predictive ETAs (23%), suggesting unnecessary product complexity.
+- **Does the workflow data match the manual process or hack you documented in M2? Note whether the specific drop-offs or time gaps explain why your persona avoids the digital tool.:** Yes. The data confirms the workflow is too slow, especially Compliance Checks at 14.6 minutes vs. a 3-minute benchmark, which helps explain why coordinators abandon the process and use manual workarounds.
+- **Look at the CSAT heatmap. Which specific cell most directly maps to your persona’s friction? Note how the NPS trend justifies the urgency of your M1 Problem Hook.:** The Coordinator Compliance CSAT score of 2.2/5 most directly maps to the persona’s friction. This aligns with the workflow data showing compliance checks take 14.6 minutes versus a 3-minute benchmark. Coordinator NPS has also fallen from +18 to -12, showing that the problem is significantly affecting satisfaction and making it urgent to address before it increases churn and renewal risk.
 
-> Based on [qual + quant evidence], I believe that [solving X] for [persona] will result in [outcome], as measured by a [X%] change in [success metric]. I will protect [guardrail metric] and make a go/no-go decision after [decision window].
-
-## Success metrics
-
-| Metric | Type | Target | Why it matters |
-|---|---|---|---|
-| _North-star_ | | _____ | _____ |
-| _Leading indicator_ | | _____ | _____ |
-| _Guardrail_ | | _____ | _____ |
+## Step 3 · Craft your hypothesis
+- **Qualitative evidence (from M2) , quote the specific friction / moment of misery for your persona:** Dispatch Coordinator rely on off-platform workarounds such as WhatsApp and manual processes when RouteLogic becomes too slow or difficult to use.
+- **Quantitative evidence (from M3) , name the metric or data point that confirms the pain; cite the number:** Compliance checks take 14.6 minutes versus a 3-minute benchmark, only 48% of coordinators reach this step, and Compliance CSAT is just 2.2/5.
+- **Persona , role, goal, and the friction you confirmed in the reconciliation steps:** A dispatch coordinator who needs to assign routes, complete compliance tasks, and manage the daily dispatch workflow quickly and reliably.
+- **Problem you are solving , one sentence describing the specific friction this initiative removes:** The compliance workflow is too slow and cumbersome, causing coordinators to abandon the digital workflow and rely on manual workarounds.
+- **Strategic outcome , what behaviour change do you expect, and how does it map to retention / revenue / churn?:** Increase completion of the digital dispatch workflow, reduce manual work, and improve coordinator satisfaction, helping reduce adoption and renewal risk.
+- **Primary success metric (initiative signal) , the leading indicator that tells you the gap is closing:** Coordinator compliance-step completion rate, currently 48%.
+- **Guardrail metric (product signal) , the metric that must NOT drop; it protects your existing base:** Core Dispatch CSAT, currently 4.1/5, must not decline.
+- **Decision window , how much time or data before you scale, pivot, or kill? minimum threshold to proceed?:** Run a 6-week pilot and proceed only if compliance completion improves meaningfully without reducing Core Dispatch CSAT.
+- **Draft your full hypothesis sentence , one to three sentences; quote the metric, name the persona, name the outcome:** We believe that simplifying the compliance workflow for Dispatch Coordinators will increase compliance completion from 48% to at least 60% and reduce reliance on manual workarounds. We will test this through a 6-week pilot while ensuring Core Dispatch CSAT does not significantly decline from its current 4.1/5.
