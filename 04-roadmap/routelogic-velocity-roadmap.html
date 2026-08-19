@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RouteLogic Velocity — Roadmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:            #12161d;
+    --bg-track:      #191f28;
+    --card:          #1e2530;
+    --card-border:   #2a3240;
+    --ink:           #e7ebf1;
+    --ink-dim:       #9aa5b4;
+    --ink-faint:     #5c6779;
+
+    --now:      #f2a93b;
+    --now-soft: rgba(242,169,59,0.12);
+    --next:     #3fb8a8;
+    --next-soft:rgba(63,184,168,0.12);
+    --later:    #7c8bb0;
+    --later-soft:rgba(124,139,176,0.10);
+    --cut:      #b5605f;
+    --cut-soft: rgba(181,96,95,0.10);
+
+    --disp: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(63,184,168,0.06), transparent),
+      radial-gradient(ellipse 900px 500px at 85% 0%, rgba(242,169,59,0.05), transparent),
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:80px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:56px 6vw 40px;
+    border-bottom:1px solid var(--card-border);
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--next);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--next);
+    border-radius:50%;
+    display:inline-block;
+    box-shadow:0 0 0 4px var(--next-soft);
+  }
+  h1{
+    font-family:var(--disp);
+    font-weight:700;
+    font-size:clamp(30px,4.2vw,48px);
+    line-height:1.05;
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
+  }
+  h1 span{ color:var(--ink-faint); font-weight:500; }
+  .subhead{
+    color:var(--ink-dim);
+    font-size:15.5px;
+    max-width:640px;
+    line-height:1.55;
+    margin:0 0 28px;
+  }
+  .crew{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-dim);
+  }
+  .crew b{ color:var(--ink); font-weight:500; }
+  .crew .dot{ color:var(--ink-faint); margin-right:6px; }
+
+  /* ---------- ROUTE LINE / LEGEND ---------- */
+  .routebar{
+    margin-top:36px;
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .routebar .seg{
+    flex:1;
+    height:3px;
+    position:relative;
+  }
+  .routebar .seg.now{ background:linear-gradient(90deg, var(--now), var(--now)); }
+  .routebar .seg.next{ background:linear-gradient(90deg, var(--now), var(--next)); }
+  .routebar .seg.later{ background:linear-gradient(90deg, var(--next), var(--later)); }
+  .routebar .node{
+    width:9px; height:9px;
+    border-radius:50%;
+    flex-shrink:0;
+    box-shadow:0 0 0 5px var(--bg);
+  }
+  .routebar .node.n1{ background:var(--now); }
+  .routebar .node.n2{ background:var(--next); }
+  .routebar .node.n3{ background:var(--later); }
+  .routebar .node.n4{ background:var(--ink-faint); }
+
+  /* ---------- LANES ---------- */
+  main{ padding:0 6vw; }
+  .lane{
+    padding:52px 0 20px;
+    border-bottom:1px solid var(--card-border);
+  }
+  .lane:last-of-type{ border-bottom:none; }
+
+  .lane-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .lane-tag{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.1em;
+    padding:5px 12px;
+    border-radius:20px;
+    border:1px solid transparent;
+  }
+  .lane-tag.now{ color:var(--now); background:var(--now-soft); border-color:rgba(242,169,59,0.3); }
+  .lane-tag.next{ color:var(--next); background:var(--next-soft); border-color:rgba(63,184,168,0.3); }
+  .lane-tag.later{ color:var(--later); background:var(--later-soft); border-color:rgba(124,139,176,0.28); }
+
+  .lane-title{
+    font-family:var(--disp);
+    font-size:22px;
+    font-weight:600;
+  }
+  .lane-meta{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+  .lane-desc{
+    color:var(--ink-dim);
+    font-size:14px;
+    margin:6px 0 28px;
+    max-width:560px;
+  }
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+    gap:16px;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-left:3px solid var(--now);
+    border-radius:10px;
+    padding:20px 22px;
+    position:relative;
+    transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    cursor:default;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    background:#222a37;
+  }
+  .card.now{ border-left-color:var(--now); }
+  .card.next{ border-left-color:var(--next); }
+  .card.later{ border-left-color:var(--later); }
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .card-id{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    letter-spacing:0.06em;
+  }
+  .badge{
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .badge.now{ color:var(--now); background:var(--now-soft); }
+  .badge.next{ color:var(--next); background:var(--next-soft); }
+  .badge.later{ color:var(--later); background:var(--later-soft); }
+
+  .card-name{
+    font-family:var(--disp);
+    font-weight:600;
+    font-size:17px;
+    line-height:1.3;
+    margin:0 0 10px;
+  }
+  .card-rationale{
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--ink-dim);
+    margin:0;
+  }
+  .flag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--now);
+    background:var(--now-soft);
+    padding:4px 10px;
+    border-radius:6px;
+  }
+  .flag::before{ content:"⚡"; font-size:11px; }
+
+  /* ---------- CUT LIST ---------- */
+  .cutzone{
+    padding:56px 0 10px;
+  }
+  .cutzone .lane-head{ margin-bottom:6px; }
+  .cutzone .lane-desc{ margin-bottom:26px; }
+
+  .cut-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+    gap:14px;
+  }
+  .cut-card{
+    background:#181c22;
+    border:1px dashed #33262a;
+    border-radius:10px;
+    padding:16px 20px;
+    opacity:0.82;
+    transition:opacity .18s ease;
+  }
+  .cut-card:hover{ opacity:1; }
+  .cut-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+  }
+  .cut-id{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+  .cut-stamp{
+    font-family:var(--mono);
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    color:var(--cut);
+    background:var(--cut-soft);
+    padding:3px 9px;
+    border-radius:20px;
+    text-transform:uppercase;
+  }
+  .cut-name{
+    font-family:var(--disp);
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink-dim);
+    text-decoration:line-through;
+    text-decoration-color:var(--cut);
+    text-decoration-thickness:1.5px;
+    margin:0 0 8px;
+  }
+  .cut-rationale{
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:40px 6vw 0;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:640px){
+    header{ padding:40px 5vw 32px; }
+    main{ padding:0 5vw; }
+    .cards, .cut-cards{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Product Roadmap · Q3–Q4 Cycle</p>
+  <h1>RouteLogic Velocity <span>/ Coordinator Workflow</span></h1>
+  <p class="subhead">Prioritization for the fleet dispatch coordinator experience — sequenced against two anchors: the 48% compliance checklist completion rate, and the connectivity-driven "Moment of Misery" that pushes coordinators onto WhatsApp and phone calls.</p>
+  <div class="crew">
+    <span><span class="dot">▸</span><b>2</b> engineers</span>
+    <span><span class="dot">▸</span><b>1</b> designer</span>
+    <span><span class="dot">▸</span><b>1</b> CS lead</span>
+  </div>
+
+  <div class="routebar" aria-hidden="true">
+    <div class="node n1"></div>
+    <div class="seg now"></div>
+    <div class="node n2"></div>
+    <div class="seg next"></div>
+    <div class="node n3"></div>
+    <div class="seg later"></div>
+    <div class="node n4"></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- NOW -->
+  <section class="lane" id="now">
+    <div class="lane-head">
+      <span class="lane-tag now">NOW</span>
+      <span class="lane-title">Pilot</span>
+      <span class="lane-meta">4 weeks · 3 accounts</span>
+    </div>
+    <p class="lane-desc">One shot, one lever. Scoped to what a 2-engineer team can ship and validate against the KPI inside the pilot window.</p>
+
+    <div class="cards">
+      <article class="card now">
+        <div class="card-top">
+          <span class="card-id">B1</span>
+          <span class="badge now">Now · Pilot</span>
+        </div>
+        <h3 class="card-name">One-Click Compliance Checklist</h3>
+        <p class="card-rationale">Directly attacks the 48% completion metric — collapsing 14.6 min into a pre-filled form is the single fastest lever we have on the primary KPI.</p>
+        <span class="flag">Primary KPI lever</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="lane" id="next">
+    <div class="lane-head">
+      <span class="lane-tag next">NEXT</span>
+      <span class="lane-title">GA Release</span>
+      <span class="lane-meta">Weeks 5–8</span>
+    </div>
+    <p class="lane-desc">Bigger builds and the second anchor — connectivity — once pilot signal confirms the compliance fix is working.</p>
+
+    <div class="cards">
+      <article class="card next">
+        <div class="card-top">
+          <span class="card-id">B4</span>
+          <span class="badge next">Next · GA</span>
+        </div>
+        <h3 class="card-name">Mobile-First Coordinator Dashboard</h3>
+        <p class="card-rationale">High value (consolidates compliance/handoff/dispatch), but a full IA rebuild in 2 taps isn't a 4-week, 2-engineer job — roadmap item, not pilot scope.</p>
+      </article>
+
+      <article class="card next">
+        <div class="card-top">
+          <span class="card-id">B6</span>
+          <span class="badge next">Next · GA</span>
+        </div>
+        <h3 class="card-name">Driver Alert Notifications</h3>
+        <p class="card-rationale">Hits the Moment of Misery head-on — this is the feature that can actually displace WhatsApp/phone-call workarounds during connectivity gaps.</p>
+        <span class="flag">Moment of Misery fix</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- LATER -->
+  <section class="lane" id="later">
+    <div class="lane-head">
+      <span class="lane-tag later">LATER</span>
+      <span class="lane-title">Backlog</span>
+      <span class="lane-meta">Unscheduled</span>
+    </div>
+    <p class="lane-desc">Real value, but adjacent to the anchors rather than on them — worth revisiting once compliance and connectivity are solved.</p>
+
+    <div class="cards">
+      <article class="card later">
+        <div class="card-top">
+          <span class="card-id">B2</span>
+          <span class="badge later">Later · Backlog</span>
+        </div>
+        <h3 class="card-name">Smart Daily Report Auto-Fill</h3>
+        <p class="card-rationale">AI auto-fill is engineering-cool but solves a report that isn't the compliance step or the connectivity failure — expensive distraction from the anchors.</p>
+      </article>
+
+      <article class="card later">
+        <div class="card-top">
+          <span class="card-id">B3</span>
+          <span class="badge later">Later · Backlog</span>
+        </div>
+        <h3 class="card-name">Shift Handoff Wizard</h3>
+        <p class="card-rationale">Real time savings (6.8 min/day), but it's adjacent to the core friction, not the friction itself — nice-to-have once compliance and connectivity are solved.</p>
+      </article>
+
+      <article class="card later">
+        <div class="card-top">
+          <span class="card-id">B5</span>
+          <span class="badge later">Later · Backlog</span>
+        </div>
+        <h3 class="card-name">Step Progress Indicator</h3>
+        <p class="card-rationale">Cheap polish that may nudge completion rate slightly, but it's a UI garnish, not a fix for the underlying 14.6-min bottleneck.</p>
+      </article>
+
+      <article class="card later">
+        <div class="card-top">
+          <span class="card-id">B9</span>
+          <span class="badge later">Later · Backlog</span>
+        </div>
+        <h3 class="card-name">Compliance Audit Trail Export</h3>
+        <p class="card-rationale">Touches the compliance domain but serves auditors, not the Coordinator's daily pain — low frequency, low urgency for this persona.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- CUT LIST -->
+  <section class="cutzone" id="cut">
+    <div class="lane-head">
+      <span class="lane-tag" style="color:var(--cut); background:var(--cut-soft); border-color:rgba(181,96,95,0.32);">CUT</span>
+      <span class="lane-title">Cut List</span>
+      <span class="lane-meta">Out of scope</span>
+    </div>
+    <p class="lane-desc">Considered and deliberately dropped — kept here so the reasoning stays visible, not buried.</p>
+
+    <div class="cut-cards">
+      <article class="cut-card">
+        <div class="cut-top">
+          <span class="cut-id">B7</span>
+          <span class="cut-stamp">Cut</span>
+        </div>
+        <h4 class="cut-name">Contextual AI ETA Display</h4>
+        <p class="cut-rationale">11% adoption is a signal, not a fluke — building further on a feature Coordinators are already ignoring is effort with no proven demand.</p>
+      </article>
+
+      <article class="cut-card">
+        <div class="cut-top">
+          <span class="cut-id">B8</span>
+          <span class="cut-stamp">Cut</span>
+        </div>
+        <h4 class="cut-name">Fleet Analytics Manager View</h4>
+        <p class="cut-rationale">This serves the Manager/Exec persona, not the Dispatch Coordinator — classic stakeholder-driven ask that doesn't belong in a Coordinator-focused pilot.</p>
+      </article>
+
+      <article class="cut-card">
+        <div class="cut-top">
+          <span class="cut-id">B10</span>
+          <span class="cut-stamp">Cut</span>
+        </div>
+        <h4 class="cut-name">In-App Coordinator Training</h4>
+        <p class="cut-rationale">Doesn't move the needle for your existing 48%-completion coordinators, and content build eats disproportionate designer/CS time this sprint.</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>RouteLogic Velocity — Coordinator Workflow Roadmap</span>
+  <span>1 pilot feature · 2 GA features · 4 backlog · 3 cut</span>
+</footer>
+
+</body>
+</html>
