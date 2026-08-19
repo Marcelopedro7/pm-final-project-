@@ -1,18 +1,31 @@
-# GTM Strategy & Success Dashboard
+# GTM Launch Plan, RouteLogic (B2B)
 
-> **Module 6 · ★ Deliverable 6.** Repo file `06-launch/gtm-and-dashboard.md` — part of your submission.
-> Do the lab in the **Module 6 · Exercise Guide** (linked from the Module 6 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **GTM Strategy & Success Dashboard** slide of your Module 6 final deck.
+| Field | Value |
+|---|---|
+| Feature | One-Click Compliance Checklist |
+| Goal | Engagement |
+| Launch tier | M, Targeted |
 
-## Go-to-market summary
+## Goal & Audience
+- **Goal:** Engagement, The feature is designed to deepen adoption by making the compliance workflow faster and easier for existing Dispatch Coordinators.
+- **Target audience:** Primary: Dispatch Coordinators using RouteLogic’s daily compliance workflow.
 
-_A concise overview of your launch plan: channels, launch size, and overall strategy._
+## Launch Tier
+- **M, Targeted**, Focused rollout to existing Dispatch Coordinators; requires targeted enablement but no broad external campaign.
 
-_____
+## Channels
+1. **Owned: In-app banner**
+2. **Owned: Launch email**
+3. **Owned: Quick-start guide**
 
-## Success dashboard
+## Enablement & Assets
+Quick-start guide, FAQ, demo video, and CS enablement guide.
 
-| KPI | Baseline | Target | Measurement window |
-|---|---|---|---|
-| _____ | _____ | _____ | _____ |
-| _____ | _____ | _____ | _____ |
+## Ownership, Budget & Timeline
+- **Ownership & budget:** PM owns the launch plan and post-launch metrics. Design owns the in-app banner and quick-start guide. Engineering owns feature rollout. CS owns customer enablement and support. No additional paid budget required.
+- **Timeline:** Week 1: finalize enablement assets and brief CS. Week 2: targeted launch to Dispatch Coordinators via in-app banner and email. Weeks 3–6: monitor adoption and compliance completion, collect feedback, and decide on iteration
+
+## Success Metrics
+- **Metrics:** Compliance-step completion rate, One-Click Compliance Checklist adoption rate, and average compliance completion time.
+- **Bad signal to watch for:** High feature adoption but no improvement in compliance completion = the feature is being used but not solving the core friction
+- **Likely post-launch decision:** Double down if compliance completion reaches ≥60% while Core Dispatch CSAT remains ≥4.0/5; otherwise iterate based on user feedback and performance data
